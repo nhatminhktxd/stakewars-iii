@@ -1,4 +1,4 @@
-# Stakewars-iii
+# Stake Wars: Episode III
 Thời gian: 13/7 - 9/9 năm 2022
 # Thử thách 001:
 ### Hãy thử lệnh này để biết thiết bị của bạn có hỗ trợ không
