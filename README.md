@@ -236,5 +236,6 @@ crontab -e
 ```
 */5 * * * * sh /root/scripts/ping.sh
 ```
+### Chỉnh sửa lại theo đường dẫn của bạn
 # Done
 
