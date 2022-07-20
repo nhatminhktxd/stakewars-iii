@@ -202,4 +202,39 @@ sudo apt install curl jq
 ####### Check Blocks Produced / Expected Command:
 `curl -s -d '{"jsonrpc": "2.0", "method": "validators", "id": "dontcare", "params": [null]}' -H 'Content-Type: application/json' 127.0.0.1:3030 | jq -c '.result.current_validators[] | select(.account_id | contains ("POOL_ID"))'`
 ```
-#Done!
+# Thử thách 6
+### Tạo Crontab cho máy chủ
+### Tạo thư mục scripts mới
+```
+mkdir scripts
+cd scripts
+```
+### Tạo tập tin ping.sh
+```
+nano ping.sh
+```
+### Chỉnh sửa code
+```
+#!/bin/sh# 
+Ping call to renew Proposal added to crontab
+export NEAR_ENV=shardnet
+export LOGS=/root/logs
+export POOLID=<YOUR_POOL_ID>
+export ACCOUNTID=<YOUR_ACCOUNT_ID>
+echo "---" >> $LOGS/all.log
+date >> $LOGS/all.log
+near call $POOLID.factory.shardnet.near ping '{}' --accountId $ACCOUNTID.shardnet.near --gas=300000000000000 >> $LOGS/all.log
+near proposals | grep $POOLID >> $LOGS/all.log
+near validators current | grep $POOLID >> $LOGS/all.log
+near validators next | grep $POOLID >> $LOGS/all.log
+```
+### Tạo một Crontab mới, nó sẽ tự chạy sau mỗi 5 phút
+```
+crontab -e
+```
+### Dán đoạn code này
+```
+*/5 * * * * sh /root/scripts/ping.sh
+```
+# Done
+
